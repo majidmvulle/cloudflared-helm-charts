@@ -15,5 +15,5 @@ entries:
       name: cloudflare-tunnel
       urls:
         - https://majidmvulle.github.io/cloudflared-helm-charts/cloudflare-tunnel-0.3.2.tgz
-      version: 0.1.3
+      version: 0.3.2
 generated: "2025-12-10T17:05:10.416957+04:00"
