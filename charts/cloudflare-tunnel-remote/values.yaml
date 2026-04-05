@@ -13,6 +13,14 @@ image:
 
 replicaCount: 2
 
+# Extra command args appended after "tunnel" and before "run".
+# Example:
+# extraArgs:
+#   - --protocol
+#   - http2
+extraArgs: []
+extraEnv: []
+
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
@@ -32,6 +40,8 @@ podLabels: {}
 podSecurityContext:
   runAsNonRoot: true
   runAsUser: 65532
+  seccompProfile:
+    type: RuntimeDefault
 
 # Security items for one container. We lock it down.
 securityContext:
@@ -40,6 +50,23 @@ securityContext:
     drop:
     - ALL
   readOnlyRootFilesystem: true
+
+probes:
+  startup:
+    enabled: true
+    failureThreshold: 36
+    periodSeconds: 5
+    timeoutSeconds: 2
+  liveness:
+    failureThreshold: 3
+    initialDelaySeconds: 10
+    periodSeconds: 10
+    timeoutSeconds: 2
+  readiness:
+    failureThreshold: 3
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    timeoutSeconds: 2
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
